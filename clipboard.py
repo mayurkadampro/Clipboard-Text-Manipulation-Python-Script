@@ -27,9 +27,10 @@ def look_for_matching(data):
         if list_of_matching_url[i] in data:
             return list_of_url[i]
 
-    for i in list_of_match_number:
-        if len(i) == len(data):
-            return i;
+    if data.isdigit():
+        for i in list_of_match_number:
+            if len(i) == len(data):
+                return i;
     return data
 
 def openClipboard():
@@ -58,14 +59,11 @@ if __name__ == '__main__':
             openClipboard()
             data = getClipboardData()
             closeClipboard()
-
+            if data == None:
+                continue
             openClipboard()
             new_data = look_for_matching(data)
             setClipboardData(new_data)
-            closeClipboard()
-
-            openClipboard()
-            data = getClipboardData()
             closeClipboard()
             time.sleep(1)
     except KeyboardInterrupt:
